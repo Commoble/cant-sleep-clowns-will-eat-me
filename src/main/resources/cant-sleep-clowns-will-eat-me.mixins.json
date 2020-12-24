@@ -2,7 +2,7 @@
 	"required": true,
 	"package": "commoble.cantsleepclownswilleatme.mixins",
 	"compatibilityLevel": "JAVA_8",
-	"refmap": "examplemod.refmap.json",
+	"refmap": "cant-sleep-clowns-will-eat-me.refmap.json",
 	"mixins": 
 	[
 		"ServerPlayerEntityMixin"
