@@ -1,29 +1,23 @@
 package commoble.cantsleepclownswilleatme;
 
-import org.apache.commons.lang3.tuple.Pair;
-
-import net.minecraftforge.fml.ExtensionPoint;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.network.FMLNetworkConstants;
 
 @Mod(CantSleepClownsWillEatMe.MODID) // tells forge to construct this during modloading
 public class CantSleepClownsWillEatMe
 {
-	public static final String MODID = "cant-sleep-clowns-will-eat-me";
-	public static CantSleepClownsWillEatMe INSTANCE;
+	public static final String MODID = "cant_sleep_clowns_will_eat_me";
 	
-	public final ServerConfig serverConfig;
+	private static CantSleepClownsWillEatMe instance;
+	public static CantSleepClownsWillEatMe get() { return instance; }
+	
+	public final CommonConfig serverConfig;
 	
 	public CantSleepClownsWillEatMe() // invoked by forge due to @Mod
 	{
-		INSTANCE = this;
+		instance = this;
 		
-		ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.DISPLAYTEST,
-			() -> Pair.of(() -> FMLNetworkConstants.IGNORESERVERONLY, (a,b) -> true));
-		
-		this.serverConfig = ConfigHelper.register(ModConfig.Type.SERVER, ServerConfig::new);
+		this.serverConfig = ConfigHelper.register(ModConfig.Type.COMMON, CommonConfig::create);
 		
 	}
 }

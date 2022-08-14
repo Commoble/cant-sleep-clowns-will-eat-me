@@ -6,7 +6,7 @@
 # The name of the mod loader type to load - for regular FML @Mod mods it should be javafml
 modLoader="javafml" #mandatory
 # A version range to match for said mod loader - for regular FML @Mod it will be the forge version
-loaderVersion="[35,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+loaderVersion="[43,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
 # The license for you mod. This is mandatory metadata and allows for easier comprehension of your redistributive properties.
 # Review your options at https://choosealicense.com/. All rights reserved is the default copyright stance, and is thus the default here.
 license="MIT License"
@@ -15,7 +15,7 @@ issueTrackerURL="https://github.com/Commoble/cant-sleep-clowns-will-eat-me/issue
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
 # The modid of the mod
-modId="cant-sleep-clowns-will-eat-me" #mandatory
+modId="cant_sleep_clowns_will_eat_me" #mandatory
 # The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
 # ${file.jarVersion} will substitute the value of the Implementation-Version as read from the mod's JAR file metadata
 # see the associated build.gradle script for how to populate this completely automatically during a build
@@ -33,6 +33,7 @@ credits="I hear the Minecraft Mod Development discord channel is the cat's banan
 # A text field displayed in the mod UI
 authors="Commoble"
 # The description text for the mod (multi line!) (#mandatory)
+displayTest="IGNORE_SERVER_VERSION"
 description='''
 This mod causes monsters that are preventing a player from being able to use a bed to be highlighted for several seconds when the player attempts to use a bed and fails due to the presence of those monsters.
 
@@ -47,7 +48,7 @@ The duration of the highlight effect is three seconds by default; this can be ad
     # Does this dependency have to exist - if not, ordering below must be specified
     mandatory=true #mandatory
     # The version range of the dependency
-    versionRange="[35,)" #mandatory
+    versionRange="[43.0.0,)" #mandatory
     # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
     ordering="NONE"
     # Side this dependency is applied on - BOTH, CLIENT or SERVER
@@ -57,6 +58,6 @@ The duration of the highlight effect is three seconds by default; this can be ad
     modId="minecraft"
     mandatory=true
 # This version range declares a minimum of the current minecraft version up to but not including the next major version
-    versionRange="[1.16.4,1.17)"
+    versionRange="[1.19.2,1.20)"
     ordering="NONE"
     side="BOTH"

@@ -4,7 +4,7 @@ This mod is completely serversided; it does not need to be installed on the clie
 
 Built jars are available here https://www.curseforge.com/minecraft/mc-mods/cant-sleep-clowns-will-eat-me
 
-This mod is configurable; the default config below is generated at `<save-folder>/serverconfig/cant-sleep-clowns-will-eat-me-server.toml` when a new world is created.
+This mod is configurable; the default config below is generated at `<minecraftfolder>/config/cant_sleep_clowns_will_eat_me-common.toml` the first time minecraft is launched with the mod present.
 
 ```toml
 #Whether highlighting of sleep-preventing monsters is enabled. Set this to false to disable the feature.
