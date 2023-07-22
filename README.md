@@ -2,7 +2,9 @@ This forge mod causes monsters that are preventing a player from being able to u
 
 This mod is completely serversided; it does not need to be installed on the client side to function unless the user desires to use this mod in singleplayer or in a LAN world they are hosting.
 
-Built jars are available here https://www.curseforge.com/minecraft/mc-mods/cant-sleep-clowns-will-eat-me
+Built jars are available here:
+* https://www.curseforge.com/minecraft/mc-mods/cant-sleep-clowns-will-eat-me
+* https://modrinth.com/mod/cant-sleep-clowns-will-eat-me
 
 This mod is configurable; the default config below is generated at `<minecraftfolder>/config/cant_sleep_clowns_will_eat_me-common.toml` the first time minecraft is launched with the mod present.
 
