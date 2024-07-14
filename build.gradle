@@ -1,80 +1,37 @@
-
-buildscript {
-    repositories {
-        maven { url = 'https://maven.minecraftforge.net' }
-        mavenCentral()
-        maven {url='https://repo.spongepowered.org/repository/maven-public/'}
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1+', changing: true
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
-    }
+plugins {
+	id 'java-library'
+	id 'eclipse'
+	id 'idea'
+	id 'net.neoforged.gradle.userdev' version "7.0.+"
 }
-apply plugin: 'net.minecraftforge.gradle'
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
 
+group = "net.commoble.${modid}"
+base { archivesName="${modid}-${mc_version}" }
 version = "${mod_version}"
-group = "commoble.${modid}" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "${modid}-${mc_version}"
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
-minecraft {
-    mappings channel: 'official', version: "${mc_version}"       
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-    
-    runs {
-        client {
-            workingDirectory project.file('run')
-            property 'forge.logging.console.level', 'debug'
-            properties 'mixin.env.disableRefMap': 'true'
-            arg "-mixin.config=cant_sleep_clowns_will_eat_me.mixins.json"
+runs {
+	configureEach {
+		systemProperty 'forge.logging.console.level', 'debug'
+		modSource project.sourceSets.main
+	}
 
-            mods {
-                "cant_sleep_clowns_will_eat_me" {
-                    source sourceSets.main
-                }
-            }
-        }
+	client {
+		// Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
+		systemProperty 'forge.enabledGameTestNamespaces', project.modid
+	}
 
-        server {
-            workingDirectory project.file('run')
-            property 'forge.logging.console.level', 'debug'
-            properties 'mixin.env.disableRefMap': 'true'
-            arg "-mixin.config=cant_sleep_clowns_will_eat_me.mixins.json"
-
-            mods {
-                "cant_sleep_clowns_will_eat_me" {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        data {
-            workingDirectory project.file('run')
-            property 'forge.logging.console.level', 'debug'
-            properties 'mixin.env.disableRefMap': 'true'
-            arg "-mixin.config=cant_sleep_clowns_will_eat_me.mixins.json"
-
-            args '--mod', 'cant-sleep-clowns-will-eat-me', '--all', '--output', file('src/generated/resources/')
-
-            mods {
-                "cant_sleep_clowns_will_eat_me" {
-                    source sourceSets.main
-                }
-            }
-        }
-    }
+	server {
+		systemProperty 'forge.enabledGameTestNamespaces', project.modid
+	}
 }
 
 repositories {
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+	implementation "net.neoforged:neoforge:${neo_version}"
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
@@ -87,30 +44,19 @@ jar {
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
             "Implementation-Vendor" :"Commoble",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-            "MixinConfigs": "${modid}.mixins.json"
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
 }
 
-jar.finalizedBy('reobfJar') 
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact jar
-        }
-    }
-    repositories {
-        maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
-        }
-    }
+tasks.withType(JavaCompile).configureEach {
+	options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
 
-
-apply plugin: 'org.spongepowered.mixin'
-
-mixin {
-    add sourceSets.main, "${modid}.refmap.json"
+// IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
 }
