@@ -40,13 +40,13 @@ public class CantSleepClownsWillEatMe
 			return;
 		
 		ServerPlayer serverPlayer = event.getEntity();
-		ServerLevel serverLevel = serverPlayer.serverLevel();
+		ServerLevel serverLevel = serverPlayer.level();
 		Vec3 vec3 = Vec3.atBottomCenterOf(event.getPos());
 		double hRadius = 8.0;
 		double yRadius = 5.0;
 		List<Monster> monsters = serverLevel.getEntitiesOfClass(Monster.class,
 			new AABB(vec3.x() - hRadius, vec3.y() - yRadius, vec3.z() - hRadius, vec3.x() + hRadius, vec3.y() + yRadius, vec3.z() + hRadius),
-			monster -> monster.isPreventingPlayerRest(serverPlayer));
+			monster -> monster.isPreventingPlayerRest(serverLevel, serverPlayer));
 		
 		if (monsters != null && !monsters.isEmpty() && this.config.highlightMobs().get())
 		{
